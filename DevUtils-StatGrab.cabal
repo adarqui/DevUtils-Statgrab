@@ -1,0 +1,22 @@
+name:                DevUtils-Statgrab
+version:             0.0.1
+synopsis:            Statgrab Helpers
+homepage:            https://github.com/adarqui/DevUtils-Statgrab
+license:             GPL-3
+license-file:        LICENSE
+author:              adarqui
+maintainer:          andrew.darqui@gmail.com
+category:            Statgrab
+build-type:          Simple
+cabal-version:       >=1.8
+
+source-repository head
+ type:     git
+ location: git://github.com/adarqui/DevUtils-Statgrab
+
+library
+  exposed-modules:
+   System.DevUtils.Statgrab
+  build-depends:       base >= 4.6, aeson, attoparsec, bytestring, scientific, text, time, transformers, MonadCatchIO-transformers, statgrab
+  GHC-Options:         -Wall -fno-warn-orphans
+  hs-source-dirs:      src
