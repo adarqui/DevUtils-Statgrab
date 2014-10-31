@@ -15,8 +15,14 @@ source-repository head
  location: git://github.com/adarqui/DevUtils-Statgrab
 
 library
-  exposed-modules:
-   System.DevUtils.Statgrab
-  build-depends:       base >= 4.6, aeson, attoparsec, bytestring, scientific, text, time, transformers, MonadCatchIO-transformers, statgrab
-  GHC-Options:         -Wall -fno-warn-orphans
-  hs-source-dirs:      src
+ exposed-modules:
+  System.DevUtils.Statgrab
+ build-depends:       base >= 4.6, aeson, attoparsec, bytestring, scientific, text, time, transformers, MonadCatchIO-transformers, statgrab
+ ghc-options:         -Wall -fno-warn-orphans
+ hs-source-dirs:      src
+
+executable "ex1"
+ main-is:             ex1.hs
+ build-depends:       base >= 4.6, aeson, transformers, statgrab, DevUtils-Statgrab
+ ghc-options:         -Wall
+ hs-source-dirs:      examples

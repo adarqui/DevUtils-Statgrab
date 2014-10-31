@@ -1,6 +1,22 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving, DeriveGeneric, StandaloneDeriving, OverloadedStrings #-}
 
 module System.DevUtils.Statgrab (
+ Host(..),
+ CPU(..),
+ CPUPercent(..),
+ Memory(..),
+ Load(..),
+ User(..),
+ Swap(..),
+ FileSystem(..),
+ DiskIO(..),
+ NetworkIO(..),
+ NetworkInterface(..),
+ Page(..),
+ ProcessState(..),
+ Process(..),
+ ProcessSource(..),
+ ProcessCount(..),
  lr,
  host,
  cpu,
@@ -28,7 +44,10 @@ import qualified Data.ByteString as B
 import Data.Time.Clock
 import Foreign.C.Types
 import GHC.Generics
-import Data.Text.Encoding (encodeUtf8)
+import qualified Data.Text as T
+import qualified Data.Text.Encoding as T
+import qualified Data.Text.Lazy as TL
+import qualified Data.Text.Lazy.Encoding as TL
 
 import System.Statgrab
 import System.Statgrab.Internal
@@ -42,14 +61,18 @@ lazyToStrict v = B.concat $ BL.toChunks v
 encode'bsc :: ToJSON a => a -> ByteString
 encode'bsc v = lazyToStrict $ encode v
 
+encode'T :: TL.Text -> B.ByteString
+encode'T = T.encodeUtf8 . TL.toStrict
+
+decode'T :: B.ByteString -> TL.Text
+decode'T = TL.fromStrict . T.decodeUtf8
+
 instance ToJSON ByteString where
- toJSON v = String $ fromJust $ decode (strictToLazy v)
- {-# INLINE toJSON #-}
+ toJSON v = String $ TL.toStrict $ decode'T v
 
 instance FromJSON ByteString where
- parseJSON (String t) = pure . encodeUtf8 $ t
+ parseJSON (String t) = pure . T.encodeUtf8 $ t
  parseJSON v          = typeMismatch "ByteString" v
- {-# INLINE parseJSON #-}
 
 deriving instance Generic CInt
 instance FromJSON CInt
@@ -61,6 +84,14 @@ instance FromJSON NominalDiffTime where
 
 instance ToJSON NominalDiffTime where
  toJSON _ = Bool False
+
+deriving instance Generic Host
+instance FromJSON Host
+instance ToJSON Host
+
+deriving instance Generic HostState
+instance FromJSON HostState
+instance ToJSON HostState
 
 deriving instance Generic CPU
 instance FromJSON CPU
