@@ -1,6 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving, DeriveGeneric, StandaloneDeriving, OverloadedStrings #-}
 
 module System.DevUtils.Statgrab (
+{-
  Host(..),
  CPU(..),
  CPUPercent(..),
@@ -17,6 +18,7 @@ module System.DevUtils.Statgrab (
  Process(..),
  ProcessSource(..),
  ProcessCount(..),
+-}
  lr,
  host,
  cpu,
@@ -50,7 +52,7 @@ import qualified Data.Text.Lazy as TL
 import qualified Data.Text.Lazy.Encoding as TL
 
 import System.Statgrab
-import System.Statgrab.Internal
+--import System.Statgrab.Internal
 
 strictToLazy :: ByteString -> BL.ByteString
 strictToLazy v = BL.fromChunks [v]
@@ -85,83 +87,83 @@ instance FromJSON NominalDiffTime where
 instance ToJSON NominalDiffTime where
  toJSON _ = Bool False
 
-deriving instance Generic Host
+--deriving instance Generic Host
 instance FromJSON Host
 instance ToJSON Host
 
-deriving instance Generic HostState
+--deriving instance Generic HostState
 instance FromJSON HostState
 instance ToJSON HostState
 
-deriving instance Generic CPU
+--deriving instance Generic CPU
 instance FromJSON CPU
 instance ToJSON CPU
 
-deriving instance Generic CPUPercent
+--deriving instance Generic CPUPercent
 instance FromJSON CPUPercent
 instance ToJSON CPUPercent
 
-deriving instance Generic Memory
+--deriving instance Generic Memory
 instance FromJSON Memory
 instance ToJSON Memory
 
-deriving instance Generic Load
+--deriving instance Generic Load
 instance FromJSON Load
 instance ToJSON Load
 
-deriving instance Generic User
+--deriving instance Generic User
 instance FromJSON User
 instance ToJSON User
 
-deriving instance Generic Swap
+--deriving instance Generic Swap
 instance FromJSON Swap
 instance ToJSON Swap
 
-deriving instance Generic DeviceType
+--deriving instance Generic DeviceType
 instance FromJSON DeviceType
 instance ToJSON DeviceType
 
-deriving instance Generic FileSystem
+--deriving instance Generic FileSystem
 instance FromJSON FileSystem
 instance ToJSON FileSystem
 
-deriving instance Generic DiskIO
+--deriving instance Generic DiskIO
 instance FromJSON DiskIO
 instance ToJSON DiskIO
 
-deriving instance Generic NetworkIO
+---deriving instance Generic NetworkIO
 instance FromJSON NetworkIO
 instance ToJSON NetworkIO
 
-deriving instance Generic InterfaceMode
+--deriving instance Generic InterfaceMode
 instance FromJSON InterfaceMode
 instance ToJSON InterfaceMode
 
-deriving instance Generic InterfaceStatus
+--deriving instance Generic InterfaceStatus
 instance FromJSON InterfaceStatus
 instance ToJSON InterfaceStatus
 
-deriving instance Generic NetworkInterface
+--deriving instance Generic NetworkInterface
 instance FromJSON NetworkInterface
 instance ToJSON NetworkInterface
 
-deriving instance Generic Page
+--deriving instance Generic Page
 instance FromJSON Page
 instance ToJSON Page
 
-deriving instance Generic ProcessState
+--deriving instance Generic ProcessState
 instance FromJSON ProcessState
 instance ToJSON ProcessState
 
-deriving instance Generic Process
+--deriving instance Generic Process
 instance FromJSON Process
 instance ToJSON Process
 
-deriving instance Generic ProcessSource
+--deriving instance Generic ProcessSource
 instance FromJSON ProcessSource
 instance ToJSON ProcessSource
 
-deriving instance Generic ProcessCount
+--deriving instance Generic ProcessCount
 instance FromJSON ProcessCount
 instance ToJSON ProcessCount
 
